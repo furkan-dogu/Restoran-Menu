@@ -1,15 +1,77 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { FOODS } from "../data/dummyData";
+import FoodIngredients from "../components/FoodIngredients";
 
 export default function FoodDetailScreen({ route }) {
-
-    const foodId = route.params.foodId
+  const foodId = route.params.foodId;
+  const selectedFood = FOODS.find((food) => food.id === foodId);
 
   return (
-    <View>
-      <Text>FoodDetailScreen {foodId}</Text>
-    </View>
-  )
+    <ScrollView style={styles.rootContainer}>
+      <Image source={{ uri: selectedFood.imageUrl }} style={styles.image} />
+      <Text style={styles.title}>{selectedFood.title}</Text>
+      <View style={styles.details}>
+        <Text style={styles.detailItem}>{selectedFood.complexity}</Text>
+        <Text style={styles.detailItem}>{selectedFood.affordability}</Text>
+      </View>
+      <View style={styles.listContainer}>
+        <View style={styles.subTitleContainer}>
+          <Text style={styles.subTitle}>İçindekiler</Text>
+        </View>
+        <FoodIngredients data={selectedFood.ingredients} />
+      </View>
+    </ScrollView>
+  );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  rootContainer: {
+    marginBottom: 50
+  },
+
+  image: {
+    width: "100%",
+    height: 300,
+  },
+
+  title: {
+    textAlign: "center",
+    textTransform: "capitalize",
+    fontSize: 24,
+    fontWeight: "bold",
+    marginTop: 5
+  },
+
+  details: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 5,
+  },
+
+  detailItem: {
+    marginHorizontal: 4,
+    fontSize: 12,
+    textTransform: "capitalize",
+    color: "red"
+  },
+
+  listContainer: {
+    width: "100%",
+    paddingHorizontal: 10
+  },
+
+  subTitleContainer: {
+    alignItems: "center",
+    borderBottomWidth: 2,
+    borderBottomColor: "orange",
+    marginVertical: 5
+  },
+
+  subTitle: {
+    color: "orange",
+    fontSize: 24,
+    fontWeight: "bold"
+  }
+});
