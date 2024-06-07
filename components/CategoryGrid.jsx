@@ -1,10 +1,10 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-export default function CategoryGrid({ title, color }) {
+export default function CategoryGrid({ title, color, pressFood }) {
   return (
     <View style={styles.gridItem}>
-      <Pressable style={({pressed}) => [styles.button, pressed ? styles.buttonPressed : null]}>
+      <Pressable style={({pressed}) => [styles.button, pressed ? styles.buttonPressed : null]} onPress={pressFood}>
         <View style={[styles.insideView, {backgroundColor: color}]}>
           <Text style={styles.title}>{title}</Text>
         </View>
@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
   gridItem: {
     flex: 1,
     height: 150,
-    justifyContent: "center",
     margin: 15,
     borderRadius: 20,
     elevation: 4,

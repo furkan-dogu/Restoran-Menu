@@ -1,12 +1,23 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList } from "react-native";
 import React from "react";
 import { CATEGORIES } from "../data/dummyData";
 import CategoryGrid from "../components/CategoryGrid";
 
-export default function CategoriesScreen() {
+export default function CategoriesScreen({ navigation }) {
   const renderCategoryItem = (data) => {
-    // console.log(data.item);
-    return <CategoryGrid title={data.item.title} color={data.item.color} />;
+    const handlePress = () => {
+      navigation.navigate("FoodOverview", {
+        categoryId: data.item.id
+      });
+    };
+
+    return (
+      <CategoryGrid
+        title={data.item.title}
+        color={data.item.color}
+        pressFood={handlePress}
+      />
+    );
   };
 
   return (
@@ -18,5 +29,3 @@ export default function CategoriesScreen() {
     />
   );
 }
-
-const styles = StyleSheet.create({});
