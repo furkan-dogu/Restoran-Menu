@@ -5,7 +5,7 @@ import CategoryGrid from "../components/CategoryGrid";
 
 export default function CategoriesScreen() {
   const renderCategoryItem = (data) => {
-    console.log(data.item);
+    // console.log(data.item);
     return <CategoryGrid title={data.item.title} color={data.item.color} />;
   };
 
@@ -14,6 +14,7 @@ export default function CategoriesScreen() {
       data={CATEGORIES}
       keyExtractor={(item) => item.id}
       renderItem={renderCategoryItem}
+      numColumns={2}
     />
   );
 }
